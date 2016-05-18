@@ -1,35 +1,51 @@
 require 'open-uri'
+require "selenium/webdriver"
 
 namespace :comedian_master do
   desc 'collect master data for comedians'
   task :yoshimoto => :environment do
-    YOSHIMOTO_WIKI = 'https://ja.wikipedia.org/wiki/%E5%90%89%E6%9C%AC%E8%88%88%E6%A5%AD%E6%89%80%E5%B1%9E%E3%82%BF%E3%83%AC%E3%83%B3%E3%83%88%E4%B8%80%E8%A6%A7'
+    LIST_URL = 'http://search.yoshimoto.co.jp/gojuon.html'
 
-    charset = nil
-    html = open(YOSHIMOTO_WIKI) do |f|
-      charset = f.charset
-      f.read
-    end
+    yoshimoto_comedians = []
+    comedian_names = []
 
-    # htmlをパース(解析)してオブジェクトを生成
-    doc = Nokogiri::HTML.parse(html, nil, charset)
+    existing_comedians = Company.yoshimoto.comedians.index_by(&:name)
 
-    taget = doc.css("#mw-content-text ul li")
+    browser = Watir::Browser.new(:phantomjs)
 
-    yoshimoto_commedian_names = []
-    first_comedian_name = 'R藤本'
-    last_comedian_name = 'ビューティーメーカー'
-    is_comedian = false
+    browser.goto(LIST_URL)
+    skip_indexes = [37, 39, 47, 48, 49]
+    (1...50).each do |idx|
+      next if skip_indexes.include?(idx)
+      id = "g#{idx}"
+      browser.link(:id, id).click
+      sleep(1)
+      doc = Nokogiri::HTML.parse(browser.html)
+      doc.css('ul.lists.group').css('li').each do |li|
+        name = li.inner_text
+        comedian_names << name
+        next if existing_comedians[name].present?
 
-    doc.css('#mw-content-text').children().css('ul').each do |ul|
-      ul.css('li').each do |li|
-        name = li.css('a').inner_text
-        is_comedian = true if name == first_comedian_name
-        yoshimoto_commedian_names << name if is_comedian
-        is_comedian = false if name == last_comedian_name
+        comedian = Comedian.new(
+          name: name,
+          url: li.css('a').first['href']
+        )
+        yoshimoto_comedians << comedian
       end
     end
 
-    puts yoshimoto_commedian_names
+    Comedian.import yoshimoto_comedians
+
+    comedians = Comedian.all.index_by(&:name)
+
+    comedians_companies = []
+    comedian_names.each do |name|
+      comedians_companies << ComediansCompany.new(
+        comedian_id: comedians[name].id,
+        company_id: Company::YOSHIMOTO_ID
+      )
+    end
+
+    ComediansCompany.import comedians_companies
   end
 end
