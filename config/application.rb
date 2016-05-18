@@ -36,7 +36,5 @@ module ComedianScouter
     config.sass.preferred_syntax = :sass
     # set default template engine to slim
     config.generators.template_engine = :slim
-
-    Tapp.config.default_printer = :awesome_print
   end
 end
