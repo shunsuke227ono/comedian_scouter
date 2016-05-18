@@ -1,5 +1,7 @@
 # comedian_scouter
 
+https://comedian-scouter.herokuapp.com/
+
 ## Local Setup
 
 ### DB
