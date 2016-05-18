@@ -21,7 +21,7 @@
 
     <%= render partial: 'layouts/admin_lte_2_header' %>
 
-    <%= render partial: 'layouts/admin_lte_2_sidebar' %>
+    <%= render partial: 'layouts/sidebar', locals: { companies: @companies } %>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
