@@ -17,10 +17,26 @@ module ComedianScouter
     # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    I18n.enforce_available_locales = true
+    config.i18n.default_locale = :ja
+
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/app/services)
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Do not create scss or coffee by default
+    config.generators do |g|
+      g.assets false
+    end
+
+    # set default to sass
+    config.sass.preferred_syntax = :sass
+    # set default template engine to slim
+    config.generators.template_engine = :slim
+
+    Tapp.config.default_printer = :awesome_print
   end
 end
