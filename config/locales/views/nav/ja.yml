@@ -2,8 +2,17 @@ ja:
   nav:
     analysis: 分析
     analysis_contents:
-      popularity_ranking: 注目度高い芸人
-      rough_diamond: ダイヤの原石芸人
-      heavy_twitterer: ツイッター大好き芸人
-      popular_twitterer: ツイート面白い芸人
+      popular_comedian: 今アツい芸人
+      popular_comedians:
+        popular: 注目度高い芸人
+        rough_diamond: ダイヤの原石芸人
+      twitter_comedian: ツイッター芸人
+      twitter_comedians:
+        heavy_twitterer: ツイッター大好き芸人
+        popular_twitterer: ツイート面白い芸人
+      comedians_map: 見取られ芸人
+      comedians_maps:
+        map: 業界見取り図
+        recommendation: あなたにオススメの芸人
+        team_build: 芸人采配決定(相性判定)
     comedians_list: お笑い芸人一覧
