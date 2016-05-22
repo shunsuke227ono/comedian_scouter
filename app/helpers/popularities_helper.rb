@@ -1,0 +1,2 @@
+module PopularitiesHelper
+end

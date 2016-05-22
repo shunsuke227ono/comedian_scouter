@@ -1,0 +1,10 @@
+.main-header
+  = link_to '#', class: 'logo' do
+    span.logo-mini
+      | CI
+    span.logo-lg
+      = t('common.comedian_scouter')
+  nav.navbar.navbar-static-top role='navigation'
+    = link_to '#', class: 'sidebar-toggle', data: { toggle: 'offcanvas'}, role: 'button' do
+      span.sr-only
+        | Toggle navigation
