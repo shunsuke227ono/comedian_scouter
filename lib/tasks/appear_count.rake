@@ -46,7 +46,7 @@ namespace :appear_count do
                 end
               end
             end
-            過去2年間
+            # 過去2年間
             if date >= Date.new(2014, 4, 1)
               comedian_ids.combination(2) { |c| CoAppear.count_pair(c[0], c[1]) }
             end
