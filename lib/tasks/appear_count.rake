@@ -23,7 +23,7 @@ namespace :appear_count do
 
   def count_quoter(browser, comedians, start_date, end_date)
     quoter_appears = {}
-    faild_urls = []
+    failed_urls = []
 
     start_date.upto(end_date) do |date|
       urls(date).each do |url|
@@ -38,7 +38,7 @@ namespace :appear_count do
               if comedians[name].present?
                 # comedians[name].appear
                 id = comedians[name].id
-                # comedian_ids << id
+                comedian_ids << id
                 if quoter_appears[id].present?
                   quoter_appears[id] += 1
                 else
@@ -46,10 +46,10 @@ namespace :appear_count do
                 end
               end
             end
-            # 過去2年間
-            # if date >= Date.new(2014, 4, 1)
-            #   comedian_ids.combination(2) { |c| CoAppear.count_pair(c[0], c[1]) }
-            # end
+            過去2年間
+            if date >= Date.new(2014, 4, 1)
+              comedian_ids.combination(2) { |c| CoAppear.count_pair(c[0], c[1]) }
+            end
           end
         rescue
           failed_urls << url
