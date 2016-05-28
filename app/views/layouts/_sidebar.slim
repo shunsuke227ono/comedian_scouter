@@ -14,29 +14,9 @@
       li
         = link_to popularities_path do
           span = t('nav.analysis_contents.popular_comedian')
-      li.treeview
+      li
         = link_to '#3' do
-          i.fa.fa-angle-left.pull-right
           span = t('nav.analysis_contents.twitter_comedian')
-          ul.treeview-menu
-            li
-              = link_to '#3-1' do
-                span = t('nav.analysis_contents.twitter_comedians.heavy_twitterer')
-              = link_to '#3-2' do
-                span = t('nav.analysis_contents.twitter_comedians.popular_twitterer')
-      li.treeview
-        = link_to '#4' do
-          i.fa.fa-angle-left.pull-right
-          span = t('nav.analysis_contents.comedians_map')
-          ul.treeview-menu
-            li
-              = link_to '#4-1' do
-                span = t('nav.analysis_contents.comedians_maps.map')
-              = link_to '#4-2' do
-                span = t('nav.analysis_contents.comedians_maps.recommendation')
-              = link_to '#4-3' do
-                span = t('nav.analysis_contents.comedians_maps.team_build')
-
       li
         = link_to relations_path do
           span = t('nav.analysis_contents.relations')
