@@ -7,14 +7,16 @@ namespace :appear_count do
     comedians = Comedian.all.index_by(&:name)
     (2009..2015).each do |year|
       sleep(180)
-      count_quoter(comedians, Date.new(year,1,1), Date.new(year,3,31))
-      sleep(180)
+      p "#{year} 4,1"
       count_quoter(comedians, Date.new(year,4,1), Date.new(year,7,31))
       sleep(180)
+      p "#{year} 7,1"
       count_quoter(comedians, Date.new(year,7,1), Date.new(year,9,30))
       sleep(180)
+      p "#{year} 10,1"
       count_quoter(comedians, Date.new(year,10,1), Date.new(year,12,31))
       sleep(180)
+      p "#{year+1} 1,1"
       count_quoter(comedians, Date.new(year+1,1,1), Date.new(year+1,3,31))
     end
   end
