@@ -19,7 +19,7 @@ namespace :comedian_master do
       next if skip_indexes.include?(idx)
       id = "g#{idx}"
       browser.link(:id, id).click
-      sleep(1)
+      sleep(0.1)
       doc = Nokogiri::HTML.parse(browser.html)
       doc.css('ul.lists.group').css('li').each do |li|
         name = li.inner_text
