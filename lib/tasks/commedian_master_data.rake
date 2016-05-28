@@ -21,7 +21,6 @@ namespace :comedian_master do
       browser.link(:id, id).click
       sleep(1)
       doc = Nokogiri::HTML.parse(browser.html)
-      # TODO: Topに名前出てる人も含むように。
       doc.css('ul.lists.group').css('li').each do |li|
         name = li.inner_text
         comedian_names << name
@@ -34,6 +33,15 @@ namespace :comedian_master do
         yoshimoto_comedians << comedian
       end
     end
+
+    yoshimoto_comedians << Comedian.new(
+      name: "明石家さんま",
+      url: "http://search.yoshimoto.co.jp/talent_prf/?id=873"
+    )
+    yoshimoto_comedians << Comedian.new(
+      name: "西川きよし",
+      url: "http://search.yoshimoto.co.jp/talent_prf/?id=702"
+    )
 
     Comedian.import yoshimoto_comedians
 
