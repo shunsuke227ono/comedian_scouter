@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
   HORIPRO_ID = 2
   JINRIKISHA_ID = 3
   WATANABE_ID = 4
+  OTAPRO_ID = 5
 
   has_many :comedians_companies
   has_many :comedians, through: :comedians_companies
@@ -19,6 +20,9 @@ class Company < ActiveRecord::Base
     end
     def watanabe
       find(WATANABE_ID)
+    end
+    def otapro
+      find(OTAPRO_ID)
     end
   end
 end

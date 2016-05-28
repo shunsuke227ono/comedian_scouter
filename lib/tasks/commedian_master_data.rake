@@ -211,12 +211,12 @@ namespace :comedian_master do
     end
   end
 
-  task :ota_pro => :environment do
+  task :otapro => :environment do
     names = ["有吉弘行", "アルコ＆ピース", "インスタントジョンソン", "劇団ひとり",
       "タイムマシーン3号", "土田晃之", "ダチョウ倶楽部", "マシンガンズ", "柳原可奈子"]
     names.each do |n|
       comedian = Comedian.create(name: n)
-      ComediansCompany.create(comedian: comedian, company_id: Company::OTA_PRO_ID)
+      ComediansCompany.create(comedian: comedian, company_id: Company::OTAPRO_ID)
     end
   end
 end
