@@ -6,6 +6,10 @@ class CoAppear < ActiveRecord::Base
   end
 
   class << self
+    def all_pairs(comedian_id)
+      where("comedian_id_1 = ? or comedian_id_2 = ?", comedian_id, comedian_id)
+    end
+
     def find_pair(comedian_id_a, comedian_id_b)
       find_by(
         comedian_id_1: comedian_id_1(comedian_id_a, comedian_id_b),

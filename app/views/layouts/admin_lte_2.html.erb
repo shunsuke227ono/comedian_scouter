@@ -7,17 +7,19 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "https://d3js.org/d3.v3.min.js" %>
+  <%= javascript_include_tag "http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js" %>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
   <![endif]-->
   <%= csrf_meta_tags %>
 </head>
 
-<body class="skin-blue sidebar-mini fixed <%= params[:controller].parameterize %> <%= action_name %>">
+<body class="skin-blue sidebar-mini fixed <%= params[:controller].parameterize %> <%= action_name %>" id="<%= controller_name + '-' + action_name %>">
   <div class="wrapper">
 
     <%= render partial: 'layouts/header' %>
