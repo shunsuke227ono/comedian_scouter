@@ -193,4 +193,30 @@ namespace :comedian_master do
       ComediansCompany.create(comedian: comedian, company_id: Company::JINRIKISHA_ID)
     end
   end
+
+  task :watanabe => :environment do
+    names = ["原田泰造", "名倉潤", "堀内健", "石塚英彦", "恵俊彰", "田中卓志"]
+    LIST_URL = 'http://www.watanabepro.co.jp/artist/500/'
+
+    browser = Watir::Browser.new(:phantomjs)
+    browser.goto(LIST_URL)
+    doc = Nokogiri::HTML.parse(browser.html)
+    doc.css('div.ArtistProf').each do |prof|
+      names << prof.css('h3').inner_text
+    end
+
+    names.each do |n|
+      comedian = Comedian.create(name: n)
+      ComediansCompany.create(comedian: comedian, company_id: Company::WATANABE_ID)
+    end
+  end
+
+  task :ota_pro => :environment do
+    names = ["有吉弘行", "アルコ＆ピース", "インスタントジョンソン", "劇団ひとり",
+      "タイムマシーン3号", "土田晃之", "ダチョウ倶楽部", "マシンガンズ", "柳原可奈子"]
+    names.each do |n|
+      comedian = Comedian.create(name: n)
+      ComediansCompany.create(comedian: comedian, company_id: Company::OTA_PRO_ID)
+    end
+  end
 end
