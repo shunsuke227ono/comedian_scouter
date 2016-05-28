@@ -1,6 +1,5 @@
 require 'open-uri'
 require "selenium/webdriver"
-
 namespace :appear_count do
   desc 'collect master data for comedians'
   task :execute => :environment do
