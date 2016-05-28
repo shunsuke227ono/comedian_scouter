@@ -5,22 +5,23 @@ namespace :appear_count do
   task :execute => :environment do
     comedians = Comedian.all.index_by(&:name)
     (2009..2015).each do |year|
+      browser = Watir::Browser.new(:phantomjs)
       p "#{year} 4,1"
-      count_quoter(comedians, Date.new(year,4,1), Date.new(year,7,31))
+      count_quoter(browser, comedians, Date.new(year,4,1), Date.new(year,7,31))
       sleep(180)
       p "#{year} 7,1"
-      count_quoter(comedians, Date.new(year,7,1), Date.new(year,9,30))
+      count_quoter(browser, comedians, Date.new(year,7,1), Date.new(year,9,30))
       sleep(180)
       p "#{year} 10,1"
-      count_quoter(comedians, Date.new(year,10,1), Date.new(year,12,31))
+      count_quoter(browser, comedians, Date.new(year,10,1), Date.new(year,12,31))
       sleep(180)
       p "#{year+1} 1,1"
-      count_quoter(comedians, Date.new(year+1,1,1), Date.new(year+1,3,31))
+      count_quoter(browser, comedians, Date.new(year+1,1,1), Date.new(year+1,3,31))
       sleep(180)
     end
   end
 
-  def count_quoter(comedians, start_date, end_date)
+  def count_quoter(browser, comedians, start_date, end_date)
     quoter_appears = {}
     faild_urls = []
 
@@ -28,7 +29,6 @@ namespace :appear_count do
       urls(date).each do |url|
         begin
           p url
-          browser = Watir::Browser.new(:phantomjs)
           browser.goto(url)
           sleep(0.5)
           doc = Nokogiri::HTML.parse(browser.html)
@@ -38,7 +38,7 @@ namespace :appear_count do
               if comedians[name].present?
                 # comedians[name].appear
                 id = comedians[name].id
-                comedian_ids << id
+                # comedian_ids << id
                 if quoter_appears[id].present?
                   quoter_appears[id] += 1
                 else
@@ -47,9 +47,9 @@ namespace :appear_count do
               end
             end
             # 過去2年間
-            if date >= Date.new(2014, 4, 1)
-              comedian_ids.combination(2) { |c| CoAppear.count_pair(c[0], c[1]) }
-            end
+            # if date >= Date.new(2014, 4, 1)
+            #   comedian_ids.combination(2) { |c| CoAppear.count_pair(c[0], c[1]) }
+            # end
           end
         rescue
           failed_urls << url
