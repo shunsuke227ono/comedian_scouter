@@ -51,8 +51,10 @@ namespace :appear_count do
               comedian_ids.combination(2) { |c| CoAppear.count_pair(c[0], c[1]) }
             end
           end
-        ensure
+        rescue
+          failed_urls << url
           p "failed for #{url}"
+        ensure
           next
         end
       end
