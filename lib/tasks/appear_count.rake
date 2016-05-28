@@ -5,7 +5,6 @@ namespace :appear_count do
   task :execute => :environment do
     comedians = Comedian.all.index_by(&:name)
     (2009..2015).each do |year|
-      sleep(180)
       p "#{year} 4,1"
       count_quoter(comedians, Date.new(year,4,1), Date.new(year,7,31))
       sleep(180)
@@ -17,6 +16,7 @@ namespace :appear_count do
       sleep(180)
       p "#{year+1} 1,1"
       count_quoter(comedians, Date.new(year+1,1,1), Date.new(year+1,3,31))
+      sleep(180)
     end
   end
 
@@ -25,6 +25,7 @@ namespace :appear_count do
 
     start_date.upto(end_date) do |date|
       urls(date).each do |url|
+        p url
         browser = Watir::Browser.new(:phantomjs)
         browser.goto(url)
         sleep(2)
