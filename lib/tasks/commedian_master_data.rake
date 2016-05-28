@@ -42,6 +42,8 @@ namespace :comedian_master do
       name: "西川きよし",
       url: "http://search.yoshimoto.co.jp/talent_prf/?id=702"
     )
+    comedian_names << "明石家さんま"
+    comedian_names << "西川きよし"
 
     Comedian.import yoshimoto_comedians
 
@@ -52,6 +54,122 @@ namespace :comedian_master do
       comedians_companies << ComediansCompany.new(
         comedian_id: comedians[name].id,
         company_id: Company::YOSHIMOTO_ID
+      )
+    end
+
+    ComediansCompany.import comedians_companies
+  end
+
+  task :horipro => :environment do
+    comedians = []
+
+    comedians << Comedian.new(
+      name: "イジリー岡田",
+      url: "http://www.horipro.co.jp/ijiriokada/"
+    )
+    comedians << Comedian.new(
+      name: "さまぁ～ず",
+      url: "http://www.horipro.co.jp/summers/"
+    )
+    comedians << Comedian.new(
+      name: "大竹一樹",
+      url: "http://www.horipro.co.jp/summers/"
+    )
+    comedians << Comedian.new(
+      name: "三村マサカズ",
+      url: "http://www.horipro.co.jp/summers/"
+    )
+    comedians << Comedian.new(
+      name: "バナナマン",
+      url: "http://com.horipro.co.jp/talent/%E3%83%90%E3%83%8A%E3%83%8A%E3%83%9E%E3%83%B3/index.html"
+    )
+    comedians << Comedian.new(
+      name: "設楽統",
+      url: "http://com.horipro.co.jp/talent/%E3%83%90%E3%83%8A%E3%83%8A%E3%83%9E%E3%83%B3/index.html"
+    )
+    comedians << Comedian.new(
+      name: "日村勇紀",
+      url: "http://com.horipro.co.jp/talent/%E3%83%90%E3%83%8A%E3%83%8A%E3%83%9E%E3%83%B3/index.html"
+    )
+    comedians << Comedian.new(
+      name: "つぶやきシロー",
+      url: "http://www.horipro.co.jp/tsubuyakishiro/"
+    )
+    comedians << Comedian.new(
+      name: "ななめ45°",
+      url: "http://com.horipro.co.jp/talent/%E3%81%AA%E3%81%AA%E3%82%8145%C2%B0/index.html"
+    )
+    comedians << Comedian.new(
+      name: "X-GUN",
+      url: "http://com.horipro.co.jp/talent/X-GUN/index.html"
+    )
+    comedians << Comedian.new(
+      name: "たんぽぽ",
+      url: "http://www.horipro.co.jp/tanpopo/"
+    )
+    comedians << Comedian.new(
+      name: "白鳥久美子",
+      url: "http://www.horipro.co.jp/tanpopo/"
+    )
+    comedians << Comedian.new(
+      name: "川村エミコ",
+      url: "http://www.horipro.co.jp/tanpopo/"
+    )
+    comedians << Comedian.new(
+      name: "ホリ",
+      url: "http://com.horipro.co.jp/talent/%E3%83%9B%E3%83%AA/index.html"
+    )
+    comedians << Comedian.new(
+      name: "和田アキ子",
+      url: "http://www.horipro.co.jp/wadaakiko/"
+    )
+    comedians << Comedian.new(
+      name: "ダブルブッキング",
+      url: "http://com.horipro.co.jp/talent/%E3%83%80%E3%83%96%E3%83%AB%E3%83%96%E3%83%83%E3%82%AD%E3%83%B3%E3%82%B0/index.html"
+    )
+    comedians << Comedian.new(
+      name: "スピードワゴン",
+      url: "http://com.horipro.co.jp/talent/%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89%E3%83%AF%E3%82%B4%E3%83%B3/index.html"
+    )
+    comedians << Comedian.new(
+      name: "井戸田潤",
+      url: "http://com.horipro.co.jp/talent/%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89%E3%83%AF%E3%82%B4%E3%83%B3/index.html"
+    )
+    comedians << Comedian.new(
+      name: "小沢一敬",
+      url: "http://com.horipro.co.jp/talent/%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89%E3%83%AF%E3%82%B4%E3%83%B3/index.html"
+    )
+    comedians << Comedian.new(
+      name: "磁石",
+      url: "http://com.horipro.co.jp/talent/%E7%A3%81%E7%9F%B3/index.html"
+    )
+    comedians << Comedian.new(
+      name: "ザ・たっち",
+      url: "http://com.horipro.co.jp/talent/%E3%82%B6%E3%83%BB%E3%81%9F%E3%81%A3%E3%81%A1/index.html"
+    )
+    comedians << Comedian.new(
+      name: "クワバタオハラ",
+      url: "http://com.horipro.co.jp/talent/%E3%82%AF%E3%83%AF%E3%83%90%E3%82%BF%E3%82%AA%E3%83%8F%E3%83%A9/index.html"
+    )
+    comedians << Comedian.new(
+      name: "くわばたりえ",
+      url: "http://com.horipro.co.jp/talent/%E3%82%AF%E3%83%AF%E3%83%90%E3%82%BF%E3%82%AA%E3%83%8F%E3%83%A9/index.html"
+    )
+    comedians << Comedian.new(
+      name: "小原正子",
+      url: "http://com.horipro.co.jp/talent/%E3%82%AF%E3%83%AF%E3%83%90%E3%82%BF%E3%82%AA%E3%83%8F%E3%83%A9/index.html"
+    )
+
+    Comedian.import comedians
+
+    first_id = Comedian.find_by(name: 'イジリー岡田').id
+    last_id = Comedian.find_by(name: '小原正子').id
+
+    comedians_companies = []
+    Comedian.where("id >= ? and id <= ?", first_id, last_id).each do |comedian|
+      comedians_companies << ComediansCompany.new(
+        comedian_id: comedian.id,
+        company_id: Company::HORIPRO_ID
       )
     end
 
