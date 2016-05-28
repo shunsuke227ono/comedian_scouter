@@ -28,7 +28,7 @@ namespace :appear_count do
         p url
         browser = Watir::Browser.new(:phantomjs)
         browser.goto(url)
-        sleep(2)
+        sleep(0.5)
         doc = Nokogiri::HTML.parse(browser.html)
         doc.css("#programlist").css("td").each do |td|
           comedian_ids = []
