@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
   YOSHIMOTO_ID = 1
   HORIPRO_ID = 2
+  JINRIKISHA_ID = 3
 
   has_many :comedians_companies
   has_many :comedians, through: :comedians_companies
@@ -10,6 +11,9 @@ class Company < ActiveRecord::Base
       find(YOSHIMOTO_ID)
     end
     def horipro
+      find(HORIPRO_ID)
+    end
+    def jinrikisha
       find(HORIPRO_ID)
     end
   end

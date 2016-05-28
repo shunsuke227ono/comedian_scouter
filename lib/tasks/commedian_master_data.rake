@@ -175,4 +175,22 @@ namespace :comedian_master do
 
     ComediansCompany.import comedians_companies
   end
+
+  task :jinrikisha => :environment do
+    names = [ "大久保佳代子", "光浦靖子", "児嶋一哉", "渡部建", "山崎弘也", "柴田英嗣", "小木博明", "矢作兼", "鈴木拓",
+      "塚地武雅" ]
+    LIST_URL = 'http://www.p-jinriki.com/talent/'
+
+    browser = Watir::Browser.new(:phantomjs)
+    browser.goto(LIST_URL)
+    doc = Nokogiri::HTML.parse(browser.html)
+    doc.css('div.talent_name').each do |talent_name|
+      names << talent_name.css('h2').inner_text
+    end
+
+    names.each do |n|
+      comedian = Comedian.create(name: n)
+      ComediansCompany.create(comedian: comedian, company_id: Company::JINRIKISHA_ID)
+    end
+  end
 end
