@@ -243,4 +243,12 @@ namespace :comedian_master do
       ComediansCompany.create(comedian: comedian, company_id: Company::OTHERS_ID)
     end
   end
+
+  task :add => :environment do
+    names = ["カンニング竹山"]
+    names.each do |n|
+      comedian = Comedian.find_or_create_by(name: n)
+      ComediansCompany.create(comedian: comedian, company_id: Company::OTHERS_ID)
+    end
+  end
 end
