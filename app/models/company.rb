@@ -5,6 +5,7 @@ class Company < ActiveRecord::Base
   WATANABE_ID = 4
   OTAPRO_ID = 5
   MASEKI_ID = 6
+  OTHERS_ID = 7
 
   has_many :comedians_companies
   has_many :comedians, through: :comedians_companies
@@ -27,6 +28,9 @@ class Company < ActiveRecord::Base
     end
     def maseki
       find(MASEKI_ID)
+    end
+    def others
+      find(OTHERS_ID)
     end
   end
 end

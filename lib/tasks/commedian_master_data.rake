@@ -230,4 +230,17 @@ namespace :comedian_master do
       ComediansCompany.create(comedian: comedian, company_id: Company::MASEKI_ID)
     end
   end
+
+  task :others => :environment do
+    names = [
+      "ビートたけし", "浅草キッド", "ガダルカナル・タカ",
+      "小堺一機", "関根勉", "キャイ～ン", "ずん", "天野ひろゆき", "ウド鈴木",
+      "タモリ", "とんねるず", "石橋貴明", "木梨憲武", "くりぃむしちゅー", "上田晋也", "有田哲平",
+      "爆笑問題", "太田光", "田中裕二"
+    ]
+    names.each do |n|
+      comedian = Comedian.create(name: n)
+      ComediansCompany.create(comedian: comedian, company_id: Company::OTHERS_ID)
+    end
+  end
 end
