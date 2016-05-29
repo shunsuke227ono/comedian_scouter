@@ -23,13 +23,12 @@ class PopularitiesController < ApplicationController
   end
 
   def history
-    @comedian = Comedian.find(params[:id])
+    unless params[:id] == "0"
+      @comedian = Comedian.find(params[:id])
+    end
   end
 
   def history_data
-    @comedian = Comedian.find(params[:id])
-    monthly_appears = @comedian.monthly_appears.index_by(&:start_date)
-
     dates = []
     date = Date.new(2010, 4, 1)
     while date < Date.new(2016, 4, 1)
@@ -38,16 +37,33 @@ class PopularitiesController < ApplicationController
     end
 
     data = []
-    last_appear = 0
-    dates.each_with_index do |date, i|
-      appear = monthly_appears[date].try(:count) || 0
-      data << {
-        i: i,
-        date: date.to_s,
-        appear: appear,
-        increasing: appear > last_appear
-      }
-      last_appear = appear
+
+    if params[:id] == "0"
+      last_appear = 0
+      dates.each_with_index do |date, i|
+        appear = MonthlyAppear.where(start_date: date).average(:count) || 0
+        data << {
+          i: i,
+          date: date.to_s,
+          appear: appear,
+          increasing: appear > last_appear
+        }
+        last_appear = appear
+      end
+    else
+      @comedian = Comedian.find(params[:id])
+      monthly_appears = @comedian.monthly_appears.index_by(&:start_date)
+      last_appear = 0
+      dates.each_with_index do |date, i|
+        appear = monthly_appears[date].try(:count) || 0
+        data << {
+          i: i,
+          date: date.to_s,
+          appear: appear,
+          increasing: appear > last_appear
+        }
+        last_appear = appear
+      end
     end
 
     render :json => data

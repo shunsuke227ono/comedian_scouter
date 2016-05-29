@@ -1,3 +1,4 @@
 ul
+  li = link_to "平均の遷移を見る", history_popularity_path(0)
   - @comedians.each do |c|
     li = link_to c.name, history_popularity_path(c.id)
