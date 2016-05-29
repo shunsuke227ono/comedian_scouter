@@ -3,7 +3,7 @@ $( document ).ready(function() {
     d3.json("history_data", function(appear) {
       var margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = 960 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      height = 700 - margin.top - margin.bottom;
 
       var svg = d3.select("#vis").append("svg")
                   .attr("width", width + margin.left + margin.right)
@@ -90,7 +90,7 @@ $( document ).ready(function() {
                       .range([0,width]);
 
       var yScale = d3.scale.linear()
-                      .domain([0,40])
+                      .domain([0,80])
                       .range([height,0]);
 
       var colorCategoryScale = d3.scale.category10();
