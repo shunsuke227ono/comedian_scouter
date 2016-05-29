@@ -4,7 +4,7 @@ $ ->
       # variables we want to access
       # in multiple places of Network
       width = 1200
-      height = 960
+      height = 1200
       # allData will store the unfiltered data
       allData = []
       curLinksData = []
