@@ -1,1 +1,34 @@
-.appear_ranking_chart
+.box.box-info
+  .box-header.with-border
+    .box-title
+      | 昨年度TV出演ランキング
+  .box-body
+    .table-responsive
+      table.table.no-margin
+        thead
+          tr
+            th
+              | 順位
+            th
+              | 名前
+            th
+              | 出演回数
+            th
+            th
+              | 成長率
+        tbody
+          - @comedians.each_with_index do |c, i|
+            tr
+              .row
+                td.col-xs-1
+                  = "第#{i+1}位"
+                td.col-xs-2
+                  = c.name
+                td.col-xs-1
+                  = "#{c.appear_count}回"
+                td.col-xs-6
+                  .progress
+                    - max = @comedians[0].appear_count
+                    .progress-bar.progress-bar-info role="progressbar" aria-valuenow="#{c.appear_count}" aria-valuemin='0' aria-valumax="#{max}" style="width: #{c.appear_count * 100.0/max}%;"
+                td.col-xs-2
+                  = @growths[c.id].try(:decorate_percent)
