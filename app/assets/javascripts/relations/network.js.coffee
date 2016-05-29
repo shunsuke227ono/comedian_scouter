@@ -366,4 +366,4 @@ $ ->
       myNetwork.updateSearch(searchTerm)
 
     d3.json "relations/map_data", (json) ->
-      myNetwork("#vis", json)
+      myNetwork("#map_vis", json)

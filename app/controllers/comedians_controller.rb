@@ -14,6 +14,40 @@ class ComediansController < ApplicationController
     @co_appears = CoAppear.all_pairs(@comedian.id).order(count: :desc).limit(number)
   end
 
+  def map_data
+    comedian = Comedian.find(params[:id])
+
+    co_appears = CoAppear.all_pairs(comedian.id).order(count: :desc).limit(20)
+    comedian_ids = co_appears.pluck(:comedian_id_1) + co_appears.pluck(:comedian_id_2)
+
+    comedians = Comedian.find(comedian_ids)
+    co_appears = CoAppear.all_pairs_of_ids(comedian_ids).where("count > 10")
+
+    data = {
+      "nodes": [],
+      "links": []
+    }
+
+    comedians.each do |c|
+      data[:nodes] << {
+        "id": c.id,
+        "name": c.name,
+        "appearcount": c.appear_count,
+        "company": c.company.name,
+      }
+    end
+
+    co_appears.each do |c|
+      data[:links] << {
+        "source": c.comedian_id_1,
+        "target": c.comedian_id_2,
+        "value": c.count
+      }
+    end
+
+    render :json => data
+  end
+
   def history_data
     dates = []
     date = Date.new(2010, 4, 1)

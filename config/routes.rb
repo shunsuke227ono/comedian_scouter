@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       get :analysis
       get :history_data
+      get :map_data
     end
   end
   resources :popularities, only: [:index] do
