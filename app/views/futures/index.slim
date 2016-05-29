@@ -1,7 +1,7 @@
 .box.box-info
   .box-header.with-border
     .box-title
-      | これからキソウ芸人
+      | 今年キソウ芸人
   .box-body
     .table-responsive
       table.table.no-margin
@@ -30,5 +30,40 @@
                   .progress
                     - max = @growths[0].rate
                     .progress-bar.progress-bar-info role="progressbar" aria-valuenow="#{g.rate}" aria-valuemin='0' aria-valumax="#{max}" style="width: #{g.rate * 100.0/max}%;"
+                td.col-xs-2
+                  = "#{g.last_year_count} => #{g.this_year_count}"
+
+.box.box-info
+  .box-header.with-border
+    .box-title
+      | 今年キエソウ芸人
+  .box-body
+    .table-responsive
+      table.table.no-margin
+        thead
+          tr
+            th
+              | 順位
+            th
+              | 名前
+            th
+              | 成長率
+            th
+            th
+              | 変異
+        tbody
+          - @dying.each_with_index do |g, i|
+            tr
+              .row
+                td.col-xs-1
+                  = "第#{i+1}位"
+                td.col-xs-2
+                  = g.comedian.name
+                td.col-xs-1
+                  = g.decorate_percent
+                td.col-xs-6
+                  .progress
+                    - max = @dying[0].rate.abs
+                    .progress-bar.progress-bar-info role="progressbar" aria-valuenow="#{g.rate.abs}" aria-valuemin='0' aria-valumax="#{max}" style="width: #{g.rate.abs * 100.0/max}%;"
                 td.col-xs-2
                   = "#{g.last_year_count} => #{g.this_year_count}"
