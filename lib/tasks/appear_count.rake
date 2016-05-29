@@ -2,28 +2,81 @@ require 'open-uri'
 require "selenium/webdriver"
 namespace :appear_count do
   desc 'collect master data for comedians'
+  task :monthly => :environment do
+    comedians = Comedian.all.index_by(&:name)
+    count_monthly(comedians, Date.new(2016,1,1), Date.new(2016,1,31))
+  end
+
+  def count_monthly(comedians, start_date, end_date)
+    monthly_appears = {}
+    failed_urls = []
+
+    start_date.upto(end_date) do |date|
+      urls(date).each do |url|
+        begin
+          p url
+          browser = Watir::Browser.new(:phantomjs)
+          browser.goto(url)
+          doc = Nokogiri::HTML.parse(browser.html)
+          doc.css("#programlist").css("td").each do |td|
+            comedian_ids = []
+            names(td).each do |name|
+              if comedians[name].present?
+                id = comedians[name].id
+                comedian_ids << id
+                if monthly_appears[id].present?
+                  monthly_appears[id] += 1
+                else
+                  monthly_appears[id] = 1
+                end
+              else
+              end
+            end
+          end
+        rescue
+          failed_urls << url
+          p "failed for #{url}"
+        ensure
+          next
+        end
+      end
+    end
+
+    p "failed_urls: #{failed_urls}"
+
+    new_monthly_appears = monthly_appears.map do |id, count|
+      MonthlyAppear.new(
+        count: count,
+        comedian_id: id,
+        start_date: start_date
+      )
+    end
+
+    MonthlyAppear.import new_monthly_appears
+  end
+
   task :execute => :environment do
     comedians = Comedian.all.index_by(&:name)
     (2009..2015).each do |year|
-      browser = Watir::Browser.new(:phantomjs)
       p "#{year} 4,1"
-      count_quoter(browser, comedians, Date.new(year,4,1), Date.new(year,7,31))
+      count_quoter(comedians, Date.new(year,4,1), Date.new(year,7,31))
       sleep(180)
       p "#{year} 7,1"
-      count_quoter(browser, comedians, Date.new(year,7,1), Date.new(year,9,30))
+      count_quoter(comedians, Date.new(year,7,1), Date.new(year,9,30))
       sleep(180)
       p "#{year} 10,1"
-      count_quoter(browser, comedians, Date.new(year,10,1), Date.new(year,12,31))
+      count_quoter(comedians, Date.new(year,10,1), Date.new(year,12,31))
       sleep(180)
       p "#{year+1} 1,1"
-      count_quoter(browser, comedians, Date.new(year+1,1,1), Date.new(year+1,3,31))
+      count_quoter(comedians, Date.new(year+1,1,1), Date.new(year+1,3,31))
       sleep(180)
     end
   end
 
-  def count_quoter(browser, comedians, start_date, end_date)
+  def count_quoter(comedians, start_date, end_date)
     quoter_appears = {}
     failed_urls = []
+    browser = Watir::Browser.new(:phantomjs)
 
     start_date.upto(end_date) do |date|
       urls(date).each do |url|
