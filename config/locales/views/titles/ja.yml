@@ -1,0 +1,13 @@
+ja:
+  titles:
+    popularities:
+      index: 今アツい芸人
+      histories: 人気の遷移
+    relations:
+      index: 相性良い芸人
+    options:
+      popularities:
+        index: 最近もっともブレイクしてる芸人はだれだ！
+        histories: 過去の傾向から未来を予測しよう！
+      relations:
+        index: 仲良し芸人はだれとだれ！

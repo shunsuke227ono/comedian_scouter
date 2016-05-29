@@ -171,4 +171,27 @@ namespace :appear_count do
   def names(td)
     td.inner_text.split(/[,【】（）]/).each {|e| e.strip!}.reject { |e| e.empty?}.uniq
   end
+
+  task :last_year => :environment do
+    monthly_appears = MonthlyAppear.where("start_date >= '2015-04-01' and start_date <= '2016-03-31'").index_by { |m_a|
+      { comedian_id: m_a.comedian_id, start_date: m_a.start_date }
+    }
+
+    date = Date.new(2015,4,1)
+    dates = []
+    11.times do
+      dates << date
+      date += 1.month
+      date = date.beginning_of_month
+    end
+
+    Comedian.all.find_each do |c|
+      p c.id
+      appear_count = 0
+      dates.each do |start_date|
+        appear_count += monthly_appears[{comedian_id: c.id, start_date: start_date}].try(:count) || 0
+      end
+      c.update(appear_count: appear_count)
+    end
+  end
 end
