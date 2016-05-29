@@ -28,7 +28,7 @@
                   = g.decorate_percent
                 td.col-xs-6
                   .progress
-                    - max = @growths_in_order[0].rate
+                    - max = @growths[0].rate
                     .progress-bar.progress-bar-info role="progressbar" aria-valuenow="#{g.rate}" aria-valuemin='0' aria-valumax="#{max}" style="width: #{g.rate * 100.0/max}%;"
                 td.col-xs-2
                   = "#{g.last_year_count} => #{g.this_year_count}"
