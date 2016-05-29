@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529163157) do
+ActiveRecord::Schema.define(version: 20160529174532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,26 @@ ActiveRecord::Schema.define(version: 20160529163157) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "grorwths", force: :cascade do |t|
+    t.date     "year",            null: false
+    t.integer  "comedian_id",     null: false
+    t.float    "rate",            null: false
+    t.integer  "last_year_count", null: false
+    t.integer  "this_year_count", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "growths", force: :cascade do |t|
+    t.date     "year",            null: false
+    t.integer  "comedian_id",     null: false
+    t.float    "rate",            null: false
+    t.integer  "last_year_count", null: false
+    t.integer  "this_year_count", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "monthly_appears", force: :cascade do |t|
