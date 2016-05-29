@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :history_data
     end
   end
+  resources :futures, only: [:index]
   resources :relations, only: [:index] do
     collection do
       get :map_data

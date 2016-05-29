@@ -6,17 +6,21 @@ ja:
     popularities:
       index: 今アツい芸人
       histories: 人気の遷移
+    futures:
+      index: お笑い業界の 未来予測
     relations:
       index: 芸人相性図
       show: 相性良い芸人
       search: 相性良い芸人
     options:
       comedians:
-        index: 超分析したい芸人を選ぼう！
+        index: 超分析したい芸人を選ぼう！ command f を使ってね
         analysis: この芸人の全て
       popularities:
         index: 最近もっともブレイクしてる芸人はだれだ！
         histories: 過去の傾向から未来を予測しよう！
+      futures:
+        index: キソウ？キエソウ？
       relations:
         index: 仲良し芸人はだれとだれ！
         show: この芸人はだれと相性よし？
