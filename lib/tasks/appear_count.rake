@@ -2,12 +2,14 @@ require 'open-uri'
 require "selenium/webdriver"
 namespace :appear_count do
   desc 'collect master data for comedians'
-  task :monthly => :environment do
+  task :monthly, [:start_date] => :environment do |t, args|
+    p args
     comedians = Comedian.all.index_by(&:name)
-    count_monthly(comedians, Date.new(2016,1,1), Date.new(2016,1,31))
+    count_monthly(comedians, args[:start_date].to_date)
   end
 
-  def count_monthly(comedians, start_date, end_date)
+  def count_monthly(comedians, start_date)
+    p end_date = start_date.end_of_month
     monthly_appears = {}
     failed_urls = []
     browser = Watir::Browser.new(:phantomjs)
@@ -17,7 +19,7 @@ namespace :appear_count do
         begin
           p url
           browser.goto(url)
-          sleep(1)
+          sleep(0.5)
           doc = Nokogiri::HTML.parse(browser.html)
           doc.css("#programlist").css("td").each do |td|
             comedian_ids = []
