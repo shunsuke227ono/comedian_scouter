@@ -90,7 +90,7 @@ $( document ).ready(function() {
                       .range([0,width]);
 
       var yScale = d3.scale.linear()
-                      .domain([0,80])
+                      .domain([0,50])
                       .range([height,0]);
 
       var colorCategoryScale = d3.scale.category10();
