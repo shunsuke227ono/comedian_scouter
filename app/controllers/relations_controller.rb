@@ -20,7 +20,7 @@ class RelationsController < ApplicationController
 
     comedians = Comedian.all.index_by(&:name)
 
-    CoAppear.where("count > 10").each do |c|
+    CoAppear.where("count > 15").each do |c|
       data[:links] << {
         "source": c.comedian_id_1,
         "target": c.comedian_id_2,
