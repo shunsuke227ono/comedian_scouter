@@ -19,7 +19,9 @@ class PopularitiesController < ApplicationController
   end
 
   def search
-    @comedians = Comedian.all
+    @comedians = Comedian.includes(:monthly_appears).all.select do |c|
+      c.monthly_appears.count > 10
+    end
   end
 
   def history
