@@ -1,5 +1,51 @@
-= @comedian.name
+.box
+  .box-header.with-border
+    .box-title
+      | 基本情報
+  .box-body
+    .table-responsive
+      table.table.no-margin
+        thead
+          tr
+            th
+              | 名前
+            th
+              | 所属
+        tbody
+          tr
+            td
+              = @comedian.name
+            td
+              = @comedian.company.name
 
-- @co_appears.each do |c_a|
-  h1 = c_a.comedians.map(&:name)
-  p = c_a.count
+.box.box-info
+  .box-header.with-border
+    .box-title
+      | 相性良い芸人ランキング
+  .box-body
+    .table-responsive
+      table.table.no-margin
+        thead
+          tr
+            th
+              | 順位
+            th
+              | 名前
+            th
+              | 昨年共演回数
+            th
+              | 相性
+        tbody
+          - @co_appears.each_with_index do |c_a, i|
+            tr
+              .row
+                td.col-xs-2
+                  = "第#{i+1}位"
+                td.col-xs-2
+                  = c_a.comedians.find { |e| e != @comedian }.name
+                td.col-xs-2
+                  = "#{c_a.count}回"
+                td.col-xs-6
+                  .progress
+                    - max = @co_appears[0].count
+                    .progress-bar.progress-bar-green role="progressbar" aria-valuenow="#{c_a.count}" aria-valuemin='0' aria-valumax="#{max}" style="width: #{c_a.count * 100.0/max}%;"
