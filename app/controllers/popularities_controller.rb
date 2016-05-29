@@ -41,7 +41,7 @@ class PopularitiesController < ApplicationController
     if params[:id] == "0"
       last_appear = 0
       dates.each_with_index do |date, i|
-        appear = MonthlyAppear.where(start_date: date).average(:count) || 0
+        appear = MonthlyAppear.where(start_date: date).where("count > 5").average(:count) || 0
         data << {
           i: i,
           date: date.to_s,
