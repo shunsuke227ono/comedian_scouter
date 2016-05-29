@@ -2,7 +2,7 @@ $( document ).ready(function() {
   if ($('body').attr('id').match(/popularities-history/)) {
     d3.json("history_data", function(appear) {
       var margin = {top: 20, right: 20, bottom: 30, left: 40},
-      width = 960 - margin.left - margin.right,
+      width = 1200 - margin.left - margin.right,
       height = 960 - margin.top - margin.bottom;
 
       var svg = d3.select("#vis").append("svg")
