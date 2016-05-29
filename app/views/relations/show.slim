@@ -1,0 +1,5 @@
+= @comedian.name
+
+- @co_appears.each do |c_a|
+  h1 = c_a.comedians.map(&:name)
+  p = c_a.count

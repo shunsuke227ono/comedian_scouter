@@ -17,4 +17,9 @@ class PopularitiesController < ApplicationController
 
     render :json => data
   end
+
+  def history
+    @comedian = Comedian.find(params[:id])
+    # @monthly_appears = 
+  end
 end

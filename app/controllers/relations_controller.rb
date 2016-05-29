@@ -20,7 +20,7 @@ class RelationsController < ApplicationController
 
     comedians = Comedian.all.index_by(&:name)
 
-    CoAppear.where("count > 5").each do |c|
+    CoAppear.where("count > 10").each do |c|
       data[:links] << {
         "source": c.comedian_id_1,
         "target": c.comedian_id_2,
@@ -29,5 +29,11 @@ class RelationsController < ApplicationController
     end
 
     render :json => data
+  end
+
+  def show
+    # NOTE: 特定の芸人に関して調べる
+    @comedian = Comedian.find(params[:id])
+    @co_appears = CoAppear.all_pairs(@comedian.id).order(count: :desc).limit(10)
   end
 end
