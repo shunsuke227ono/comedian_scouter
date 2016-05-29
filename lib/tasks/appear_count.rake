@@ -58,6 +58,41 @@ namespace :appear_count do
     MonthlyAppear.import new_monthly_appears
   end
 
+  task :co_appear, [:start_date] => :environment do |t, args|
+    comedians = Comedian.all.index_by(&:name)
+    start_date = args[:start_date].to_date
+    end_date = start_date + 3.month
+    failed_urls = []
+    browser = Watir::Browser.new(:phantomjs)
+
+    start_date.upto(end_date) do |date|
+      urls(date).each do |url|
+        begin
+          p url
+          browser.goto(url)
+          sleep(0.5)
+          doc = Nokogiri::HTML.parse(browser.html)
+          doc.css("#programlist").css("td").each do |td|
+            comedian_ids = []
+            names(td).each do |name|
+              if comedians[name].present?
+                id = comedians[name].id
+                comedian_ids << id
+              end
+            end
+            comedian_ids.combination(2) { |c| CoAppear.count_pair(c[0], c[1]) }
+          end
+        rescue
+          failed_urls << url
+          p "failed for #{url}"
+        ensure
+          next
+        end
+      end
+    end
+    p "failed_urls: #{failed_urls}"
+  end
+
   task :execute => :environment do
     comedians = Comedian.all.index_by(&:name)
     (2009..2015).each do |year|
