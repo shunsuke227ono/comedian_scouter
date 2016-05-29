@@ -1,79 +1,146 @@
 $( document ).ready(function() {
   if ($('body').attr('id').match(/popularities-history/)) {
+    d3.json("history_data", function(appear) {
+      var margin = {top: 20, right: 20, bottom: 30, left: 40},
+      width = 960 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
 
-    var url = window.location.href;
-    var is_id = false;
-    var id = null;
-    url.split('/').forEach(function(u) {
-      if (is_id) {
-        id = u;
-        is_id = false;
-      }
-      if (u == 'popularities') { is_id = true; }
-    });
-    console.log(id)
+      var svg = d3.select("#vis").append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+      var dates = [
+        "2010年-04月",
+        "2010年-05月",
+        "2010年-06月",
+        "2010年-07月",
+        "2010年-08月",
+        "2010年-09月",
+        "2010年-10月",
+        "2010年-11月",
+        "2010年-12月",
+        "2011年-01月",
+        "2011年-02月",
+        "2011年-03月",
+        "2011年-04月",
+        "2011年-05月",
+        "2011年-06月",
+        "2011年-07月",
+        "2011年-08月",
+        "2011年-09月",
+        "2011年-10月",
+        "2011年-11月",
+        "2011年-12月",
+        "2012年-01月",
+        "2012年-02月",
+        "2012年-03月",
+        "2012年-04月",
+        "2012年-05月",
+        "2012年-06月",
+        "2012年-07月",
+        "2012年-08月",
+        "2012年-09月",
+        "2012年-10月",
+        "2012年-11月",
+        "2012年-12月",
+        "2013年-01月",
+        "2013年-02月",
+        "2013年-03月",
+        "2013年-04月",
+        "2013年-05月",
+        "2013年-06月",
+        "2013年-07月",
+        "2013年-08月",
+        "2013年-09月",
+        "2013年-10月",
+        "2013年-11月",
+        "2013年-12月",
+        "2014年-01月",
+        "2014年-02月",
+        "2014年-03月",
+        "2014年-04月",
+        "2014年-05月",
+        "2014年-06月",
+        "2014年-07月",
+        "2014年-08月",
+        "2014年-09月",
+        "2014年-10月",
+        "2014年-11月",
+        "2014年-12月",
+        "2015年-01月",
+        "2015年-02月",
+        "2015年-03月",
+        "2015年-04月",
+        "2015年-05月",
+        "2015年-06月",
+        "2015年-07月",
+        "2015年-08月",
+        "2015年-09月",
+        "2015年-10月",
+        "2015年-11月",
+        "2015年-12月",
+        "2016年-01月",
+        "2016年-02月",
+        "2016年-03月"]
 
-    var formatDate = d3.time.format("%d-%b-%y");
+      var xScale = d3.scale.linear()
+                      .domain([0,71])
+                      .range([0,width]);
 
-    var x = d3.time.scale()
-        .range([0, width]);
+      var yScale = d3.scale.linear()
+                      .domain([0,40])
+                      .range([height,0]);
 
-    var y = d3.scale.linear()
-        .range([height, 0]);
+      var colorCategoryScale = d3.scale.category10();
 
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom");
+      var xAxis = d3.svg.axis()
+                      .scale(xScale)
+                      .orient("bottom")
+                      .tickSize(6, -height)
+                      .tickFormat(function(d){ return dates[d];});
 
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left");
+      var yAxis = d3.svg.axis()
+                      .ticks(5)
+                      .scale(yScale)
+                      .orient("left")
+                      .tickSize(6, -width);
 
-    var line = d3.svg.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.close); });
+      // lineの設定。
+      var line = d3.svg.line()
+          .x(function(d) { return xScale(d["i"]); })
+          .y(function(d) { return yScale(d["appear"]); })
+          .interpolate("cardinal"); // 線の形を決める。
 
-    var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      svg.selectAll("circle")
+          .data(appear)
+          .enter()
+           .append("circle")
+           .attr("r",5)
+           .attr("fill", function(d){ return colorCategoryScale(d["increasing"]); })
+           .attr("cx", function(d){ return xScale(d['i']); })
+           .attr("cy", function(d){ return yScale(d["appear"]); });
 
-    d3.json("history_data", type, function(error, data) {
-      if (error) throw error;
+      // line表示。
+      svg.append("path")
+           .datum(appear)
+           .attr("class", "line")
+           .attr("d", line); // 上で作ったlineを入れて、ラインpathを作る。
 
-      x.domain(d3.extent(data, function(d) { return d.date; }));
-      y.domain(d3.extent(data, function(d) { return d.close; }));
+      svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+          .append("text")
+            .attr("y", -10)
+            .attr("x",10)
+            .style("text-anchor", "end")
+            .text("appear(TV出演数(回))");
 
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
           .call(xAxis);
-
-      svg.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-        .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end")
-          .text("Price ($)");
-
-      svg.append("path")
-          .datum(data)
-          .attr("class", "line")
-          .attr("d", line);
     });
-
-    function type(d) {
-      d.date = formatDate.parse(d.date);
-      d.close = +d.close;
-      return d;
-    }
   }
 });

@@ -109,3 +109,31 @@ line.link {
   fill: none;
   stroke-width: 1.5px;
 }
+
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path {
+/*
+fillとopacityで半透明な背景色。
+*/
+  fill: Aquamarine;
+  opacity: 0.1;
+  stroke: #000;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #000;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: DarkGreen;
+  stroke-width: 1.5px;
+}

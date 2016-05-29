@@ -40,6 +40,7 @@ class RelationsController < ApplicationController
 
   def show
     # NOTE: 特定の芸人に関して調べる
+    # TODO: グラフで見せても良いな
     @comedian = Comedian.find(params[:id])
     number = params[:number] || 10
     @co_appears = CoAppear.all_pairs(@comedian.id).order(count: :desc).limit(number)

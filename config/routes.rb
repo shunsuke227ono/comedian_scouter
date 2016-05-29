@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :popularities, only: [:index] do
     collection do
       get :appear_ranking_data
+      get :search
     end
     member do
       get :history
