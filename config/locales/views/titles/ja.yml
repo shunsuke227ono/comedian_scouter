@@ -8,6 +8,8 @@ ja:
       histories: 人気の遷移
     futures:
       index: お笑い業界の 未来予測
+    pasts:
+      index: お笑い業界の 過去
     relations:
       index: 芸人相性図
       show: 相性良い芸人
@@ -21,6 +23,8 @@ ja:
         histories: 過去の傾向から未来を予測しよう！
       futures:
         index: キソウ？キエソウ？
+      pasts:
+        index: その年の顔芸人/消えた一発屋は..?
       relations:
         index: 仲良し芸人はだれとだれ！
         show: この芸人はだれと相性よし？
