@@ -1,4 +1,6 @@
 class Growth < ActiveRecord::Base
+  belongs_to :comedian
+
   def percent
     # 少数第2位まで
     i = (rate*100).to_s.index('.') + 2
