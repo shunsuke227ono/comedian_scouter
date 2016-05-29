@@ -63,7 +63,7 @@
                   = g.decorate_percent
                 td.col-xs-6
                   .progress
-                    - max = @dying[0].rate.abs
-                    .progress-bar.progress-bar-info role="progressbar" aria-valuenow="#{g.rate.abs}" aria-valuemin='0' aria-valumax="#{max}" style="width: #{g.rate.abs * 100.0/max}%;"
+                    - max = @dying.last.rate
+                    .progress-bar.progress-bar-info role="progressbar" aria-valuenow="#{g.rate}" aria-valuemin='0' aria-valumax="#{max}" style="width: #{g.rate * 100.0/max}%;"
                 td.col-xs-2
                   = "#{g.last_year_count} => #{g.this_year_count}"
