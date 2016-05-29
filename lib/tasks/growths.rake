@@ -8,7 +8,7 @@ namespace :growths do
         if last_year_count != 0
           rate = this_year_count * 1.0 / last_year_count
         else
-          rate = nil
+          rate = -1
         end
         growths << Growth.new(
           year: "#{year}/04/01",
