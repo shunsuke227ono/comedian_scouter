@@ -20,6 +20,13 @@ class PopularitiesController < ApplicationController
 
   def history
     @comedian = Comedian.find(params[:id])
-    # @monthly_appears = 
+  end
+
+  def history_data
+    @comedian = Comedian.find(params[:id])
+    monthly_appears = @comedian.monthly_appears.index_by(&:start_date)
+
+    data = []
+    render :json => data
   end
 end

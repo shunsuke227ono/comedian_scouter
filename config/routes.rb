@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
     member do
       get :history
+      get :history_data
     end
   end
   resources :relations, only: [:index] do
