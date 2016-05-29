@@ -8,7 +8,7 @@ class ComediansController < ApplicationController
     @rank = Comedian.where("appear_count > ?", @comedian.appear_count).count + 1
     @whole_n = Comedian.count
 
-    @growths = @comedian.growths.index_by(&:start_date)
+    @growths = @comedian.growths.index_by(&:year)
 
     number = params[:number] || 10
     @co_appears = CoAppear.all_pairs(@comedian.id).order(count: :desc).limit(number)
