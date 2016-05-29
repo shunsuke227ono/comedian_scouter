@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :relations, only: [:index] do
     collection do
       get :map_data
+      get :search
     end
     member do
       get :show

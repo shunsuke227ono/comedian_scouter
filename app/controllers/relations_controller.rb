@@ -34,9 +34,14 @@ class RelationsController < ApplicationController
     render :json => data
   end
 
+  def search
+    @comedians = Comedian.includes(:company)
+  end
+
   def show
     # NOTE: 特定の芸人に関して調べる
     @comedian = Comedian.find(params[:id])
-    @co_appears = CoAppear.all_pairs(@comedian.id).order(count: :desc).limit(10)
+    number = params[:number] || 10
+    @co_appears = CoAppear.all_pairs(@comedian.id).order(count: :desc).limit(number)
   end
 end

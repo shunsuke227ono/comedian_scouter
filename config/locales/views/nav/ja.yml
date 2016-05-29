@@ -15,6 +15,7 @@ ja:
         map: 業界見取り図
         recommendation: あなたにオススメの芸人
         team_build: 芸人采配決定(相性判定)
-      relations: 相性良い芸人
+      relations: 芸人相性図
+      relations_show: 相性の良い芸人
       histories: 人気の遷移
     comedians_list: お笑い芸人一覧
