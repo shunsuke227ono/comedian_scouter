@@ -9,7 +9,7 @@ class RelationsController < ApplicationController
       "links": []
     }
 
-    Comedian.includes(:company).("appear_count > 10").each do |c|
+    Comedian.includes(:company).where("appear_count > 10").each do |c|
       data[:nodes] << {
         "id": c.id,
         "name": c.name,
