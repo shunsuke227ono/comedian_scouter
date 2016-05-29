@@ -35,7 +35,7 @@ class RelationsController < ApplicationController
   end
 
   def search
-    @comedians = Comedian.includes(:company)
+    @comedians = Comedian.includes(:company).where("appear_count > 10")
   end
 
   def show
