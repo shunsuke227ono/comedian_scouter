@@ -1,7 +1,42 @@
 .box.box-info
   .box-header.with-border
     .box-title
-      | 昨年度TV出演ランキング
+      | 今まさにキテるぞ芸人
+  .box-body
+    .table-responsive
+      table.table.no-margin
+        thead
+          tr
+            th
+              | 順位
+            th
+              | 名前
+            th
+              | 成長率
+            th
+            th
+              | 変異
+        tbody
+          - @growths_in_order.each_with_index do |g, i|
+            tr
+              .row
+                td.col-xs-1
+                  = "第#{i+1}位"
+                td.col-xs-2
+                  = g.comedian.name
+                td.col-xs-1
+                  = g.decorate_percent
+                td.col-xs-6
+                  .progress
+                    - max = @growths_in_order[0].rate
+                    .progress-bar.progress-bar-info role="progressbar" aria-valuenow="#{g.rate}" aria-valuemin='0' aria-valumax="#{max}" style="width: #{g.rate * 100.0/max}%;"
+                td.col-xs-2
+                  = "#{g.last_year_count} => #{g.this_year_count}"
+
+.box.box-info
+  .box-header.with-border
+    .box-title
+      | TV出演ランキング
   .box-body
     .table-responsive
       table.table.no-margin

@@ -2,6 +2,9 @@ class PopularitiesController < ApplicationController
   def index
     @comedians = Comedian.includes(:company).order(appear_count: :desc).limit(50)
     @growths = Growth.where(year: '2015/04/01', comedian_id: @comedians.ids).index_by(&:comedian_id)
+
+    @growths_in_order = Growth.includes(:comedian).where(year: '2015/04/01').
+      where('this_year_count > 100').order(rate: :desc).limit(50)
   end
 
   def appear_ranking_data
