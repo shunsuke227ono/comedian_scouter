@@ -252,7 +252,7 @@ $ ->
         if layout == "force"
           force.on("tick", forceTick)
             .charge(-300)
-            .linkDistance(120)
+            .linkDistance(180)
         else if layout == "radial"
           force.on("tick", radialTick)
             .charge(charge)

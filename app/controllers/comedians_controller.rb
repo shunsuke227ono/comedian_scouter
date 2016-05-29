@@ -17,7 +17,7 @@ class ComediansController < ApplicationController
   def map_data
     comedian = Comedian.find(params[:id])
 
-    co_appears = CoAppear.all_pairs(comedian.id).order(count: :desc).limit(20)
+    co_appears = CoAppear.all_pairs(comedian.id).order(count: :desc).limit(30)
     comedian_ids = co_appears.pluck(:comedian_id_1) + co_appears.pluck(:comedian_id_2)
 
     comedians = Comedian.find(comedian_ids)
