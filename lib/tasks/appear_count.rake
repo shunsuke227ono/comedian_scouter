@@ -10,13 +10,14 @@ namespace :appear_count do
   def count_monthly(comedians, start_date, end_date)
     monthly_appears = {}
     failed_urls = []
+    browser = Watir::Browser.new(:phantomjs)
 
     start_date.upto(end_date) do |date|
       urls(date).each do |url|
         begin
           p url
-          browser = Watir::Browser.new(:phantomjs)
           browser.goto(url)
+          sleep(1)
           doc = Nokogiri::HTML.parse(browser.html)
           doc.css("#programlist").css("td").each do |td|
             comedian_ids = []
