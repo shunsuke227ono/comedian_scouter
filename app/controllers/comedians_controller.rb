@@ -1,6 +1,6 @@
 class ComediansController < ApplicationController
   def index
-    @comedians = Comedian.all
+    @comedians = Comedian.includes(:company).where("has_monthly_appears > 10").order(appear_count: :desc)
   end
 
   def analysis

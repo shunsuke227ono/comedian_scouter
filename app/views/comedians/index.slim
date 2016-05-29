@@ -1,3 +1,25 @@
-ul
-  - @comedians.each do |c|
-    li = link_to c.name, analysis_comedian_path(c.id)
+.box
+  .box-header.with-border
+    .box-title
+      | 芸人一覧
+  .box-body
+    .table-responsive
+      table.table.no-margin
+        thead
+          tr
+            th
+              | 名前
+            th
+              | TV出演数
+            th
+              | 所属
+        tbody
+          - @comedians.each_with_index do |c, i|
+            tr
+              .row
+                td.col-xs-4
+                  = link_to c.name, analysis_comedian_path(c.id)
+                td.col-xs-4
+                  = "#{c.appear_count}回"
+                td.col-xs-4
+                  = c.company.try(:name)
