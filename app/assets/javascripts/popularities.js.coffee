@@ -11,5 +11,5 @@ $ ->
         .selectAll("div")
           .data(data)
         .enter().append("div")
-          .style("width", (d) -> x(d.appear_count) + "px")
+          .style("width", (d) -> x(d.appear_count) * 0.2 + "px")
           .text((d) -> d.name + "(#{d.company}) " + d.appear_count + "回")
