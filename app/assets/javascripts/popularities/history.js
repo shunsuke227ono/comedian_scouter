@@ -1,11 +1,11 @@
 $( document ).ready(function() {
-  if ($('body').attr('id').match(/popularities-history/)) {
+  if ($('body').attr('id').match(/popularities-history/) || $('body').attr('id').match(/comedians-analysis/) ) {
     d3.json("history_data", function(appear) {
       var margin = {top: 20, right: 20, bottom: 30, left: 40},
-      width = 1200 - margin.left - margin.right,
-      height = 960 - margin.top - margin.bottom;
+      width = 960 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
 
-      var svg = d3.select("#vis").append("svg")
+      var svg = d3.select("#vis_history").append("svg")
                   .attr("width", width + margin.left + margin.right)
                   .attr("height", height + margin.top + margin.bottom)
                   .append("g")
