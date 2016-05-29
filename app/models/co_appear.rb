@@ -10,6 +10,10 @@ class CoAppear < ActiveRecord::Base
       where("comedian_id_1 = ? or comedian_id_2 = ?", comedian_id, comedian_id)
     end
 
+    def all_pairs_of_ids(comedian_ids)
+      where("comedian_id_1 IN (?) AND comedian_id_2 IN (?)", comedian_ids, comedian_ids)
+    end
+
     def find_pair(comedian_id_a, comedian_id_b)
       find_by(
         comedian_id_1: comedian_id_1(comedian_id_a, comedian_id_b),

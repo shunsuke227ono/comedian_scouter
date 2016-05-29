@@ -9,7 +9,10 @@ class RelationsController < ApplicationController
       "links": []
     }
 
-    Comedian.includes(:company).where("appear_count > 10").each do |c|
+    min_count = 30
+    comedians = Comedian.includes(:company).where("appear_count > #{min_count}")
+
+    comedians.each do |c|
       data[:nodes] << {
         "id": c.id,
         "name": c.name,
@@ -18,9 +21,9 @@ class RelationsController < ApplicationController
       }
     end
 
-    comedians = Comedian.all.index_by(&:name)
+    min_relation = 10
 
-    CoAppear.where("count > 15").each do |c|
+    CoAppear.all_pairs_of_ids(comedians.ids).where("count > #{min_relation}").each do |c|
       data[:links] << {
         "source": c.comedian_id_1,
         "target": c.comedian_id_2,
