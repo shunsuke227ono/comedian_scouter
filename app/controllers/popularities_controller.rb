@@ -3,7 +3,7 @@ class PopularitiesController < ApplicationController
   end
 
   def appear_ranking_data
-    comedians = Comedian.includes(:company).where("appear_count > 5").order(appear_count: :desc)
+    comedians = Comedian.includes(:company).where("appear_count > 50").order(appear_count: :desc)
 
     data = []
     comedians.each_with_index do |c, i|
