@@ -43,7 +43,7 @@
         - rate = growth.try(:rate)
         - if rate.present? && rate != -1
           h3
-            = "#{rate*100}% (#{growth.last_year_count} => #{growth.this_year_count})"
+            = "#{growth.percent}% (#{growth.last_year_count} => #{growth.this_year_count})"
         - else
           h3
             | 測定不能
@@ -54,7 +54,7 @@
         - rate = growth.try(:rate)
         - if rate.present? && rate != -1
           h3
-            = "#{rate*100}% (#{growth.last_year_count} => #{growth.this_year_count})"
+            = "#{growth.percent}% (#{growth.last_year_count} => #{growth.this_year_count})"
         - else
           h3
             | 測定不能
@@ -65,7 +65,7 @@
         - rate = growth.try(:rate)
         - if rate.present? && rate != -1
           h3
-            = "#{rate*100}% (#{growth.last_year_count} => #{growth.this_year_count})"
+            = "#{growth.percent}% (#{growth.last_year_count} => #{growth.this_year_count})"
         - else
           h3
             | 測定不能
@@ -76,7 +76,7 @@
         - rate = growth.try(:rate)
         - if rate.present? && rate != -1
           h3
-            = "#{rate*100}% (#{growth.last_year_count} => #{growth.this_year_count})"
+            = "#{growth.percent}% (#{growth.last_year_count} => #{growth.this_year_count})"
         - else
           h3
             | 測定不能
@@ -87,7 +87,7 @@
         - rate = growth.try(:rate)
         - if rate.present? && rate != -1
           h3
-            = "#{rate*100}% (#{growth.last_year_count} => #{growth.this_year_count})"
+            = "#{growth.percent}% (#{growth.last_year_count} => #{growth.this_year_count})"
         - else
           h3
             | 測定不能
