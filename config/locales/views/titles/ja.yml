@@ -1,5 +1,8 @@
 ja:
   titles:
+    comedians:
+      index: 超分析プロフィール - 芸人一覧 -
+      show: 超分析プロフィール
     popularities:
       index: 今アツい芸人
       histories: 人気の遷移
@@ -8,6 +11,9 @@ ja:
       show: 相性良い芸人
       search: 相性良い芸人
     options:
+      comedians:
+        index: 超分析したい芸人を選ぼう！
+        show: この芸人の全て
       popularities:
         index: 最近もっともブレイクしてる芸人はだれだ！
         histories: 過去の傾向から未来を予測しよう！

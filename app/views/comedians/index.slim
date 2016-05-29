@@ -1,0 +1,3 @@
+ul
+  - @comedians.each do |c|
+    li = link_to c.name, comedian_path(c.id)

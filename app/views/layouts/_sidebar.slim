@@ -12,6 +12,9 @@
       li.header
         = t('nav.analysis')
       li
+        = link_to comedians_path do
+          span = t('nav.analysis_contents.profiles')
+      li
         = link_to popularities_path do
           span = t('nav.analysis_contents.popular_comedian')
       li
