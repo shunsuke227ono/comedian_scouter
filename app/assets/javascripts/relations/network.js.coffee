@@ -3,7 +3,7 @@ $ ->
     Network = () ->
       # variables we want to access
       # in multiple places of Network
-      width = 960
+      width = 1200
       height = 960
       # allData will store the unfiltered data
       allData = []
@@ -251,8 +251,8 @@ $ ->
         layout = newLayout
         if layout == "force"
           force.on("tick", forceTick)
-            .charge(-200)
-            .linkDistance(100)
+            .charge(-300)
+            .linkDistance(120)
         else if layout == "radial"
           force.on("tick", radialTick)
             .charge(charge)
