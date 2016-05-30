@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'top#show'
+  root to: 'comedians#index'
 
   resources :comedians, only: [:index, :show] do
     member do
